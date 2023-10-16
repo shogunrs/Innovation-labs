@@ -1,0 +1,23 @@
+{
+  "name": "innovation-labs",
+  "version": "1.0.0",
+  "description": "Simple Pre-Interview Assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shogunrs/Innovation-labs.git"
+  },
+  "author": "Jean Ribeiro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shogunrs/Innovation-labs/issues"
+  },
+  "homepage": "https://github.com/shogunrs/Innovation-labs#readme",
+  "dependencies": {
+    "@types/node": "^20.8.6",
+    "typescript": "^5.2.2"
+  }
+}
