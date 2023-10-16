@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/shogunrs/Innovation-labs#readme",
   "dependencies": {
+    "@types/axios": "^0.14.0",
     "@types/node": "^20.8.6",
+    "axios": "^1.5.1",
     "typescript": "^5.2.2"
   }
 }
