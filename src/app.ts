@@ -2,28 +2,35 @@ import GetTransactionsService from './services/GetTransactionsService';
 import SubmitTransactionDataService from './services/SubmitTransactionDataService';
 import ProcessTransactionDataService from './services/ProcessTransactionDataService';
 
-async function main() {
-    try {
+class TransactionManager {
+    private getTransactionsService: GetTransactionsService;
+    private processTransactionDataService: ProcessTransactionDataService;
+    private submitTransactionDataService: SubmitTransactionDataService;
 
-        // Retrieving the transaction data.
-        const getTransactionsService = new GetTransactionsService();
-        const data = await getTransactionsService.execute();
+    constructor() {
+        this.getTransactionsService = new GetTransactionsService();
+        this.processTransactionDataService = new ProcessTransactionDataService();
+        this.submitTransactionDataService = new SubmitTransactionDataService();
+    }
 
-        if (!data || !data.id || !data.transactions) {
-            throw new Error('Data from GetTransactionsService is malformed or missing required properties.');
+    async run() {
+        try {
+            const data = await this.getTransactionsService.execute();
+
+            if (!data?.id || !data?.transactions) {
+                throw new Error('Data is malformed or missing required properties.');
+            }
+
+            const result = this.processTransactionDataService.execute(data);
+            const finalResult = await this.submitTransactionDataService.execute({ id: data.id, result });
+
+            console.log('Final Result:', finalResult);
+        } catch (err) {
+            console.error('An error occurred:', err);
         }
-
-        // Processing the transaction data.
-        const processTransactionDataService = new ProcessTransactionDataService();
-        const result = processTransactionDataService.execute(data);
-
-        // Submitting the result.
-        const submitTransactionDataService = new SubmitTransactionDataService();
-        const finalResult = await submitTransactionDataService.execute({ id: data.id, result });
-        console.log('Final Result:', finalResult);
-    } catch (err) {
-        console.error('An error occurred:', err);
     }
 }
 
-main(); 
+// Execução
+const transactionManager = new TransactionManager();
+transactionManager.run();

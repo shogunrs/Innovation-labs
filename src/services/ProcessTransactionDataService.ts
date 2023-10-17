@@ -9,9 +9,8 @@ class ProcessTransactionDataService {
     execute(data: ITransactionData): string[] {
 
         // Getting the previous year
-        const lastYear = new Date().getFullYear() - 1;
 
-        const lastYearTransactions = data.transactions.filter(tr => tr.timeStamp.startsWith(lastYear.toString()));
+        const lastYearTransactions = data.transactions.filter(tr => tr.timeStamp.startsWith((new Date().getFullYear() - 1).toString()));
 
         // Accumulating the sum of transactions per employee.
         const totalAmountPerEmployee = lastYearTransactions.reduce((acc: EmployeeAmountAccumulator, tr) => {
