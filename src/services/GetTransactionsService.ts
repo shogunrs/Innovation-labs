@@ -1,26 +1,19 @@
-import axios from 'axios';
+import { ApiBase } from "../api/Apibase";
 
 class GetTransactionsService {
-    async execute() {
-        try {
-            const response = await axios.get('https://interview.adpeai.com/api/v2/get-task');
 
-            return response.data;
-        } catch (err) {
-            throw err;
-        }
+    async execute() {
+
+        return await ApiBase.get('get-task');
     }
 }
 export default GetTransactionsService;
 
 
-new GetTransactionsService().execute().then((data) => {
-    console.log(data);
-}
-).catch((err) => {
-    console.log(err);
-}
-);
+
+
+
+
 
 
 
