@@ -1,7 +1,5 @@
 // Supondo que os imports estejam corretos.
 import { ITransactionData } from "../interfaces/ITransactionData";
-import { IAccumulator } from "../interfaces/IAccumulator"; // Se não for necessário, pode remover
-
 type EmployeeAmountAccumulator = {
     [employeeID: string]: number;
 };
