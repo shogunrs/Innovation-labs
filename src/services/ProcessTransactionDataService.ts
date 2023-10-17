@@ -8,12 +8,12 @@ class ProcessTransactionDataService {
 
     execute(data: ITransactionData): string[] {
 
-        // Obtendo o ano anterior
+        // Getting the previous year
         const lastYear = new Date().getFullYear() - 1;
 
         const lastYearTransactions = data.transactions.filter(tr => tr.timeStamp.startsWith(lastYear.toString()));
 
-        // Acumulando a soma das transações por empregado.
+        // Accumulating the sum of transactions per employee.
         const totalAmountPerEmployee = lastYearTransactions.reduce((acc: EmployeeAmountAccumulator, tr) => {
             acc[tr.employee.id] = (acc[tr.employee.id] || 0) + tr.amount;
             return acc;
@@ -22,7 +22,7 @@ class ProcessTransactionDataService {
         let topEarnerId: string | null = null;
         let topEarnerAmount = 0;
 
-        // Identificando o empregado com o maior valor acumulado.
+        // Identifying the employee with the highest accumulated value
         for (const [employeeID, amount] of Object.entries(totalAmountPerEmployee)) {
             if (Number(amount) > topEarnerAmount) {
                 topEarnerAmount = Number(amount);
@@ -30,7 +30,7 @@ class ProcessTransactionDataService {
             }
         }
 
-        // Filtrando as transações do empregado de maior ganho que têm o tipo 'alpha'.
+        // Filtering transactions of the highest earning employee that are of type 'alpha'
         const resultTransactionIds = lastYearTransactions
             .filter(tr => tr.employee.id === topEarnerId && tr.type === 'alpha')
             .map(tr => tr.transactionID);
