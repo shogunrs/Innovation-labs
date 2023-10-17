@@ -4,6 +4,7 @@
   "description": "Simple Pre-Interview Assignment",
   "main": "index.js",
   "scripts": {
+    "start": "ts-node src/app.ts",
     "test": "jest"
   },
   "repository": {
